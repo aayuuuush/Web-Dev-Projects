@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption and Decryption</title>
+    <style>
+        body {
+            background-color: #262626;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #4db8ff;
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 40px;
+        }
+
+        nav ul, footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li, footer ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        a {
+            color: #80bfff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        input[type="text"], input[type="number"], button {
+            padding: 10px;
+            border: 1px solid #4db8ff;
+            border-radius: 6px;
+            width: calc(70% - 22px); /* Subtract 22px for button padding and border */
+            margin-bottom: 10px;
+            background-color: #333;
+            color: #ffffff;
+        }
+
+        button {
+            background-color: #4db8ff;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 0 auto;
+            display: block;
+            width: 100px;
+        }
+
+        button:hover {
+            background-color: #1a75ff;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .cipher-section {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px; /* Adjusted max-width */
+    margin: 20px auto; /* Added margin to center and create gap */
+}
+
+.cipher-section + .cipher-section {
+    margin-top: 40px; /* Add margin to create gap between sections */
+}
+    
+    .cipher-section input[type="text"],
+    .cipher-section input[type="number"] {
+        width: calc(100% - 22px); /* Subtract 22px for input padding and border */
+    }
+
+
+        .footer-btn {
+            background-color: #4db8ff;
+            color: #ffffff;
+            border: none;
+            padding: 6px 12px; /* Adjusted padding */
+            border-radius: 6px;
+            text-decoration: none;
+            display: block;
+            margin: 20px auto 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 150px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer-btn:hover {
+            background-color: #1a75ff;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .button-group button {
+            flex: 1;
+            margin-right: 10px; /* Adjust the gap between buttons */
+        }
+        
+        .button-group button:last-child {
+            margin-right: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Online Encryption and Decryption Tool</h1>
+        <nav>
+            <ul>
+                <li><a href="https://www.geeksforgeeks.org/caesar-cipher-in-cryptography/">What is Caesar Cipher?</a></li>
+                <li><a href="https://www.geeksforgeeks.org/playfair-cipher-with-examples/">What is Playfair Cipher?</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+<!-- Caesar Cipher -->
+<div class="cipher-section">
+    <h2>Caesar Cipher</h2>
+    <label for="caesarPlainText">Enter Plain Text:</label>
+    <input type="text" id="caesarPlainText">
+    <label for="caesarKey">Enter Key:</label>
+    <input type="number" id="caesarKey">
+    <div class="button-group">
+        <button onclick="encryptCaesar()">Encrypt</button>
+        <button onclick="clearCaesar()">Clear</button> <!-- Added clear button -->
+    </div>
+    <p>Encrypted Text: <span id="caesarEncryptedText"></span></p>
+    <label for="caesarCipherText">Enter Cipher Text:</label>
+    <input type="text" id="caesarCipherText">
+    <div class="button-group">
+        <button onclick="decryptCaesar()">Decrypt</button>
+        <button onclick="clearCaesar()">Clear</button> <!-- Added clear button -->
+    </div>
+    <p>Decrypted Text: <span id="caesarDecryptedText"></span></p>
+</div>
+
+<!-- Playfair Cipher -->
+<div class="cipher-section">
+    <h2>Playfair Cipher</h2>
+    <label for="playfairPlainText">Enter Plain Text:</label>
+    <input type="text" id="playfairPlainText">
+    <label for="playfairKey">Enter Key:</label>
+    <input type="text" id="playfairKey">
+    <div class="button-group">
+        <button onclick="encryptPlayfair()">Encrypt</button>
+        <button onclick="clearPlayfair()">Clear</button> <!-- Added clear button -->
+    </div>
+    <p>Encrypted Text: <span id="playfairEncryptedText"></span></p>
+    <label for="playfairCipherText">Enter Cipher Text:</label>
+    <input type="text" id="playfairCipherText">
+    <div class="button-group">
+        <button onclick="decryptPlayfair()">Decrypt</button>
+        <button onclick="clearPlayfair()">Clear</button> <!-- Added clear button -->
+    </div>
+    <p>Decrypted Text: <span id="playfairDecryptedText"></span></p>
+</div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <!-- <p>Additional Information:</p>
+        <ul>
+            <li><a href="#caesar-info">About Caesar Cipher</a></li>
+            <li><a href="#playfair-info">About Playfair Cipher</a></li>
+        </ul> -->
+        <a href="2.html" class="footer-btn">Back to Home Page</a>
+    </div>
+</footer>
+
+<script>
+// Caesar Cipher
+function encryptCaesar() {
+    let plainText = document.getElementById("caesarPlainText").value.toUpperCase();
+    let key = parseInt(document.getElementById("caesarKey").value);
+    let encryptedText = "";
+    for (let i = 0; i < plainText.length; i++) {
+        if (plainText[i] >= 'A' && plainText[i] <= 'Z') {
+            let charCode = plainText.charCodeAt(i);
+            encryptedText += String.fromCharCode(((charCode - 65 + key) % 26) + 65);
+        } else {
+            encryptedText += plainText[i];
+        }
+    }
+    document.getElementById("caesarEncryptedText").innerText = encryptedText;
+}
+
+function decryptCaesar() {
+    let cipherText = document.getElementById("caesarCipherText").value.toUpperCase();
+    let key = parseInt(document.getElementById("caesarKey").value);
+    let decryptedText = "";
+    for (let i = 0; i < cipherText.length; i++) {
+        if (cipherText[i] >= 'A' && cipherText[i] <= 'Z') {
+            let charCode = cipherText.charCodeAt(i);
+            decryptedText += String.fromCharCode(((charCode - 65 - key + 26) % 26) + 65);
+        } else {
+            decryptedText += cipherText[i];
+        }
+    }
+    document.getElementById("caesarDecryptedText").innerText = decryptedText;
+}
+
+// Playfair Cipher
+function generateKeySquare(key) {
+    key = key.replace(/[^a-z]/g, "").replace(/[j]/g, "i").toLowerCase();
+    var alphabet = "abcdefghiklmnopqrstuvwxyz"; // Omitting 'j'
+    var keySquare = key;
+    for (var i = 0; i < alphabet.length; i++) {
+        if (keySquare.indexOf(alphabet.charAt(i)) === -1) {
+            keySquare += alphabet.charAt(i);
+        }
+    }
+    return keySquare;
+}
+
+function generateDigraphs(text) {
+    var digraphs = [];
+    for (var i = 0; i < text.length; i += 2) {
+        var a = text.charAt(i);
+        var b = (i + 1 === text.length) ? 'x' : text.charAt(i + 1); // Add 'x' if text length is odd
+        if (a === b) {
+            b = 'x'; // If both letters are the same, add an 'x' after the first letter
+            i--;
+        }
+        digraphs.push([a, b]);
+    }
+    if (digraphs.length % 2 !== 0) {
+        digraphs.push(['x', 'x']); // Add 'x' if text length is odd
+    }
+    return digraphs;
+}
+
+function encryptPlayfair() {
+    var plainText = document.getElementById("playfairPlainText").value.toLowerCase().replace(/[^a-z]/g, "");
+    var key = document.getElementById("playfairKey").value.toLowerCase().replace(/[^a-z]/g, "");
+    var keySquare = generateKeySquare(key);
+    var digraphs = generateDigraphs(plainText);
+    var cipherText = "";
+    for (var i = 0; i < digraphs.length; i++) {
+        var a = digraphs[i][0];
+        var b = digraphs[i][1];
+        var row1 = Math.floor(keySquare.indexOf(a) / 5);
+        var col1 = keySquare.indexOf(a) % 5;
+        var row2 = Math.floor(keySquare.indexOf(b) / 5);
+        var col2 = keySquare.indexOf(b) % 5;
+        if (row1 === row2) {
+            cipherText += keySquare[row1 * 5 + (col1 + 1) % 5];
+            cipherText += keySquare[row2 * 5 + (col2 + 1) % 5];
+        } else if (col1 === col2) {
+            cipherText += keySquare[((row1 + 1) % 5) * 5 + col1];
+            cipherText += keySquare[((row2 + 1) % 5) * 5 + col2];
+        } else {
+            cipherText += keySquare[row1 * 5 + col2];
+            cipherText += keySquare[row2 * 5 + col1];
+        }
+    }
+    document.getElementById("playfairEncryptedText").innerText = cipherText.toUpperCase();
+}
+
+function decryptPlayfair() {
+    var cipherText = document.getElementById("playfairCipherText").value.toLowerCase().replace(/[^a-z]/g, "");
+    var key = document.getElementById("playfairKey").value.toLowerCase().replace(/[^a-z]/g, "");
+    var keySquare = generateKeySquare(key);
+    var digraphs = generateDigraphs(cipherText);
+    var plainText = "";
+    for (var i = 0; i < digraphs.length; i++) {
+        var a = digraphs[i][0];
+        var b = digraphs[i][1];
+        var row1 = Math.floor(keySquare.indexOf(a) / 5);
+        var col1 = keySquare.indexOf(a) % 5;
+        var row2 = Math.floor(keySquare.indexOf(b) / 5);
+        var col2 = keySquare.indexOf(b) % 5;
+        if (row1 === row2) {
+            plainText += keySquare[row1 * 5 + (col1 === 0 ? 4 : col1 - 1)];
+            plainText += keySquare[row2 * 5 + (col2 === 0 ? 4 : col2 - 1)];
+        } else if (col1 === col2) {
+            plainText += keySquare[((row1 === 0 ? 4 : row1 - 1) * 5) + col1];
+            plainText += keySquare[((row2 === 0 ? 4 : row2 - 1) * 5) + col2];
+        } else {
+            plainText += keySquare[row1 * 5 + col2];
+            plainText += keySquare[row2 * 5 + col1];
+        }
+    }
+    document.getElementById("playfairDecryptedText").innerText = plainText.toUpperCase();
+}
+
+function clearCaesar() {
+    document.getElementById("caesarPlainText").value = "";
+    document.getElementById("caesarKey").value = "";
+    document.getElementById("caesarCipherText").value = "";
+    document.getElementById("caesarEncryptedText").innerText = "";
+    document.getElementById("caesarDecryptedText").innerText = "";
+}
+
+function clearPlayfair() {
+    document.getElementById("playfairPlainText").value = "";
+    document.getElementById("playfairKey").value = "";
+    document.getElementById("playfairCipherText").value = "";
+    document.getElementById("playfairEncryptedText").innerText = "";
+    document.getElementById("playfairDecryptedText").innerText = "";
+}
+
+</script>
+
+</body>
+</html>
