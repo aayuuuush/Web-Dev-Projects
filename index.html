@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falcon Medisystems - Biomedical Equipment Supplier</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #005b96;
+            --secondary: #0d7b96;
+            --accent: #00a8cc;
+            --light: #f1f9ff;
+            --dark: #002b4e;
+            --success: #28a745;
+        }
+
+        body {
+            background-color: #f8fbfe;
+            color: #333;
+            line-height: 1.6;
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), 
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f0f8ff"/><path d="M20,20 Q50,5 80,20 T100,50 Q85,80 50,100 T0,50 Q15,20 50,0 T100,50" fill="none" stroke="%2300a8cc" stroke-width="0.5" stroke-opacity="0.1"/></svg>');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: #fff;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        nav a.active {
+            background-color: var(--accent);
+        }
+
+        .cta-button {
+            background-color: var(--accent);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent);
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            border-color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 91, 150, 0.9), rgba(0, 91, 150, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%23005b96" opacity="0.1"/><path d="M40,40 Q100,20 160,40 T200,100 Q180,160 100,200 T0,100 Q20,40 100,0 T200,100" fill="none" stroke="%23ffffff" stroke-width="0.8" stroke-opacity="0.2"/></svg>');
+            background-size: cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            border: 2px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            border-color: white;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 20px auto 0;
+            font-size: 1.1rem;
+        }
+
+        /* Products Section */
+        .products-container {
+            overflow-x: auto;
+        }
+
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .products-table th {
+            background-color: var(--primary);
+            color: white;
+            text-align: left;
+            padding: 18px 25px;
+            font-weight: 600;
+        }
+
+        .products-table tr:nth-child(even) {
+            background-color: #f0f9ff;
+        }
+
+        .products-table tr:hover {
+            background-color: #e6f4ff;
+        }
+
+        .products-table td {
+            padding: 25px;
+            vertical-align: top;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .product-image {
+            width: 120px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 8px;
+        }
+
+        .product-name {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .product-category {
+            display: inline-block;
+            background-color: #e0f7fa;
+            color: var(--secondary);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .feature-content {
+            padding: 25px;
+        }
+
+        .feature-content h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .feature-content p {
+            color: #666;
+        }
+
+        /* Testimonials */
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            margin: 20px;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #555;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--accent);
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .testimonial-text::before {
+            top: -20px;
+            left: -20px;
+        }
+
+        .testimonial-text::after {
+            bottom: -40px;
+            right: -20px;
+        }
+
+        .testimonial-author {
+            margin-top: 30px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .testimonial-role {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(rgba(0, 91, 150, 0.05), rgba(0, 91, 150, 0.05));
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .contact-icon {
+            background: var(--primary);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .contact-text p {
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-col p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .products-table th, 
+            .products-table td {
+                padding: 15px 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-clinic-medical"></i>
+                </div>
+                <div class="logo-text">FALCON <span>MEDISYSTEMS</span></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#features">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="#contact" class="cta-button">Request Quote</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Advanced Biomedical Solutions for Healthcare Excellence</h1>
+            <p>Providing cutting-edge medical equipment and systems to healthcare facilities worldwide since 2005</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">Explore Products</a>
+                <a href="#contact" class="btn btn-secondary">Schedule Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Biomedical Equipment</h2>
+                <p>Discover our range of high-quality, reliable medical equipment designed to meet the needs of modern healthcare facilities</p>
+            </div>
+            
+            <div class="products-container">
+                <table class="products-table">
+                    <thead>
+                        <tr>
+                            <th>Equipment</th>
+                            <th>Description</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="product-name">Digital ECG Machine</div>
+                                <span class="product-category">Diagnostic</span>
+                            </td>
+                            <td>
+                                <div class="product-description">
+                                    Advanced 12-lead ECG system with wireless connectivity, touch screen interface, and automated analysis. Features include high-resolution display, internal memory for 500+ ECGs, and USB/Bluetooth data transfer.
+                                </div>
+                            </td>
+                            <td>
+                                <div class="product-image-container">
+                                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='100' viewBox='0 0 120 100'><rect width='120' height='100' fill='%23f0f8ff'/><path d='M20,50 L40,30 L60,70 L80,40 L100,60' stroke='%23005b96' stroke-width='3' fill='none'/><circle cx='30' cy='50' r='5' fill='%2300a8cc'/><circle cx='50' cy='50' r='5' fill='%2300a8cc'/><circle cx='70' cy='50' r='5' fill='%2300a8cc'/><circle cx='90' cy='50' r='5' fill='%2300a8cc'/></svg>" alt="ECG Machine" class="product-image">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="product-name">Patient Monitor</div>
+                                <span class="product-category">Monitoring</span>
+                            </td>
+                            <td>
+                                <div class="product-description">
+                                    Multi-parameter patient monitor with 15" touchscreen, continuous monitoring of ECG, SpO2, NIBP, temperature, and respiration. Features modular design, long battery life, and central monitoring compatibility.
+                                </div>
+                            </td>
+                            <td>
+                                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='100' viewBox='0 0 120 100'><rect width='120' height='100' fill='%23f0f8ff'/><rect x='10' y='10' width='100' height='80' rx='5' fill='white' stroke='%23005b96' stroke-width='2'/><rect x='20' y='20' width='80' height='40' fill='%23e6f4ff'/><circle cx='40' cy='70' r='8' fill='%2300a8cc'/><circle cx='70' cy='70' r='8' fill='%2300a8cc'/><circle cx='100' cy='70' r='8' fill='%2300a8cc'/></svg>" alt="Patient Monitor" class="product-image">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="product-name">Infusion Pump</div>
+                                <span class="product-category">Therapy</span>
+                            </td>
+                            <td>
+                                <div class="product-description">
+                                    Smart infusion pump with drug library, dose error reduction system, and wireless connectivity. Supports multiple infusion modes with precision accuracy of ±2%. Equipped with comprehensive safety alarms.
+                                </div>
+                            </td>
+                            <td>
+                                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='100' viewBox='0 0 120 100'><rect width='120' height='100' fill='%23f0f8ff'/><rect x='20' y='10' width='80' height='80' rx='5' fill='white' stroke='%23005b96' stroke-width='2'/><rect x='40' y='20' width='40' height='30' fill='%23e6f4ff'/><circle cx='60' cy='65' r='15' fill='%2300a8cc'/><path d='M60,50 L60,80' stroke='white' stroke-width='3'/></svg>" alt="Infusion Pump" class="product-image">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="product-name">Ventilator System</div>
+                                <span class="product-category">Critical Care</span>
+                            </td>
+                            <td>
+                                <div class="product-description">
+                                    ICU ventilator with advanced pulmonary diagnostics, multiple ventilation modes, and intuitive touch interface. Features include built-in oxygen blender, internal battery, and comprehensive monitoring parameters.
+                                </div>
+                            </td>
+                            <td>
+                                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='100' viewBox='0 0 120 100'><rect width='120' height='100' fill='%23f0f8ff'/><rect x='20' y='15' width='80' height='70' rx='5' fill='white' stroke='%23005b96' stroke-width='2'/><rect x='30' y='25' width='60' height='30' fill='%23e6f4ff'/><circle cx='40' cy='65' r='8' fill='%2300a8cc'/><circle cx='60' cy='65' r='8' fill='%2300a8cc'/><circle cx='80' cy='65' r='8' fill='%2300a8cc'/></svg>" alt="Ventilator" class="product-image">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="product-name">Ultrasound System</div>
+                                <span class="product-category">Imaging</span>
+                            </td>
+                            <td>
+                                <div class="product-description">
+                                    Portable ultrasound system with 15" HD display, multi-frequency probes, and advanced imaging modes. Features include elastography, 3D/4D imaging, wireless connectivity, and extended battery life.
+                                </div>
+                            </td>
+                            <td>
+                                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='100' viewBox='0 0 120 100'><rect width='120' height='100' fill='%23f0f8ff'/><rect x='15' y='10' width='90' height='80' rx='5' fill='white' stroke='%23005b96' stroke-width='2'/><ellipse cx='60' cy='35' rx='30' ry='15' fill='%23e6f4ff'/><path d='M40,60 L80,60' stroke='%2300a8cc' stroke-width='3'/><path d='M50,65 L70,65' stroke='%2300a8cc' stroke-width='3'/><path d='M45,70 L75,70' stroke='%2300a8cc' stroke-width='3'/></svg>" alt="Ultrasound" class="product-image">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="product-name">Defibrillator</div>
+                                <span class="product-category">Emergency</span>
+                            </td>
+                            <td>
+                                <div class="product-description">
+                                    Biphasic defibrillator with AED and manual modes, CPR feedback system, and 8-hour battery life. Features clear voice prompts, ECG monitoring, and data recording for post-event analysis.
+                                </div>
+                            </td>
+                            <td>
+                                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='100' viewBox='0 0 120 100'><rect width='120' height='100' fill='%23f0f8ff'/><rect x='25' y='15' width='70' height='70' rx='5' fill='white' stroke='%23005b96' stroke-width='2'/><path d='M45,30 L75,30 L75,70 L45,70 Z' fill='%23e6f4ff'/><path d='M55,40 L65,40 L65,60 L55,60 Z' fill='%2300a8cc'/><path d='M60,30 L60,70' stroke='%23ff3b3b' stroke-width='3'/></svg>" alt="Defibrillator" class="product-image">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Falcon Medisystems</h2>
+                <p>We provide comprehensive solutions to meet all your biomedical equipment needs</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Quality Certified</h3>
+                        <p>All our equipment meets international quality standards (ISO 13485, CE, FDA) and comes with comprehensive warranties and certifications.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Maintenance & Support</h3>
+                        <p>Our team of certified biomedical technicians provides installation, calibration, preventive maintenance, and 24/7 technical support.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Training Programs</h3>
+                        <p>Comprehensive training programs for medical staff to ensure optimal utilization of equipment and adherence to safety protocols.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Client Testimonials</h2>
+                <p>Hear what healthcare professionals say about our products and services</p>
+            </div>
+            
+            <div class="testimonials-container">
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        Falcon Medisystems has been our trusted equipment partner for over 8 years. Their infusion pumps and patient monitors have significantly improved our ICU operations with their reliability and advanced features.
+                    </div>
+                    <div class="testimonial-author">Dr. Sarah Johnson</div>
+                    <div class="testimonial-role">Chief Medical Officer, City General Hospital</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Reach out to our team for inquiries, quotes, or support</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Our Location</h4>
+                            <p>123 Medical Plaza, Health District<br>San Francisco, CA 94103</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Phone</h4>
+                            <p>+1 (800) 555-HEAL<br>+1 (415) 123-4567</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>info@falconmedisystems.com<br>support@falconmedisystems.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-clinic-medical"></i>
+                        </div>
+                        <div class="logo-text">FALCON <span>MEDISYSTEMS</span></div>
+                    </div>
+                    <p>Providing advanced biomedical solutions to healthcare institutions worldwide with a commitment to quality, innovation, and service excellence.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#features">Services</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Products</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Diagnostic Equipment</a></li>
+                        <li><a href="#">Monitoring Systems</a></li>
+                        <li><a href="#">Therapeutic Devices</a></li>
+                        <li><a href="#">Life Support Equipment</a></li>
+                        <li><a href="#">Medical Laboratory</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest updates and product releases.</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Falcon Medisystems. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color:#00a8cc"></i> for Healthcare Excellence</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                header.style.background = 'linear-gradient(135deg, var(--primary), var(--dark))';
+            } else {
+                header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+                header.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+            }
+        });
+
+        // Simple testimonial rotation
+        const testimonials = [
+            {
+                text: "The ventilator systems we purchased from Falcon Medisystems have been exceptionally reliable during the pandemic. Their technical support team is always responsive and knowledgeable.",
+                author: "Dr. Michael Rodriguez",
+                role: "ICU Director, Regional Medical Center"
+            },
+            {
+                text: "We've equipped our entire hospital with Falcon's patient monitors. The transition was seamless with their installation team and training programs. Highly recommended!",
+                author: "Jennifer Kim",
+                role: "Nursing Director, Community Hospital"
+            },
+            {
+                text: "Their ultrasound systems offer incredible image quality at a competitive price point. The portable design has been invaluable for our mobile clinic operations.",
+                author: "Dr. Alan Thompson",
+                role: "Chief Radiologist, Diagnostic Imaging Center"
+            }
+        ];
+
+        let currentTestimonial = 0;
+        const testimonialElement = document.querySelector('.testimonial');
+        
+        function rotateTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            const testimonial = testimonials[currentTestimonial];
+            
+            testimonialElement.innerHTML = `
+                <div class="testimonial-text">
+                    ${testimonial.text}
+                </div>
+                <div class="testimonial-author">${testimonial.author}</div>
+                <div class="testimonial-role">${testimonial.role}</div>
+            `;
+        }
+
+        // Rotate testimonials every 8 seconds
+        setInterval(rotateTestimonial, 8000);
+    </script>
+</body>
+</html>
